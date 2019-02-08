@@ -1,0 +1,7 @@
+---
+- name: Install unbound
+  apt: name=unbound state=latest
+- name: Configure unbound
+  template: src=unbound.conf.j2 dest=/etc/unbound/unbound.conf owner=root group=root mode=0400
+  notify:
+    - Restart unbound

@@ -1,0 +1,8 @@
+---
+- name: Install ferm to manage iptables
+  apt: name=ferm state=present
+- name: Enable IPv4-forwarding
+  sysctl: name=net.ipv4.ip_forward value=1 reload=yes sysctl_set=yes
+- name: Enable the firewall-rules
+  template: src=ferm.conf.j2 dest=/etc/ferm/ferm.conf owner=root group=root mode=0400
+- shell: /usr/sbin/ferm /etc/ferm/ferm.conf

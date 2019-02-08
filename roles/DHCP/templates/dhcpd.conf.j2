@@ -1,0 +1,20 @@
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+
+subnet {{ local_subnet | regex_replace('\/(.*)', '') }}  netmask 255.255.255.0 {
+  range {{ local_subnet | regex_replace('\.0(.*)', '.100') }} {{ local_subnet | regex_replace('\.0(.*)', '.200') }};
+  option routers {{ internal_address }};
+  option domain-name "{{ local_domain_name }}";
+  option domain-name-servers {{ internal_address }};
+}
+
+{% for device in localdevices %}
+
+host {{ device.hostname }} {
+  hardware ethernet {{ device.physical_address }};
+  fixed-address {{ device.ip_address }};
+  option host-name "{{ device.hostname }}.{{ local_domain_name }}";
+}
+
+{% endfor %}

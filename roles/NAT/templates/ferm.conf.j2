@@ -1,0 +1,40 @@
+@def $DEV_EXT = {{ external_interface }};
+@def $DEV_LAN = {{ internal_interface }};
+@def $DEV_LOOPBACK = {{ loopback_interface }};
+@def $LOCALNET = {{ local_subnet }};
+
+domain ip {
+    table filter {
+        chain INPUT {
+            policy ACCEPT;
+        }
+
+        chain OUTPUT {
+            policy ACCEPT;
+        }
+
+        chain FORWARD {
+            policy ACCEPT;
+        }
+    }
+    table nat {
+	chain POSTROUTING {
+	    saddr $LOCALNET outerface $DEV_EXT MASQUERADE;
+	}
+    }
+}
+
+domain ip6 {
+    table filter {
+        chain INPUT {
+            policy DROP;
+            interface $DEV_LOOPBACK ACCEPT;
+        }
+        chain OUTPUT {
+            policy DROP;
+        }
+        chain FORWARD {
+            policy DROP;
+        }
+    }
+}

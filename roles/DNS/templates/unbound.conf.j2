@@ -1,0 +1,38 @@
+server:
+	verbosity: 0
+	interface: 0.0.0.0
+	port: 53
+
+	do-ip4: yes
+	do-ip6: no
+	do-udp: yes
+	do-tcp: yes
+
+
+	access-control: 0.0.0.0/0 deny
+	access-control: 127.0.0.0/8 allow
+	access-control: {{ local_subnet }} allow
+
+	directory: "/etc/unbound"
+
+	logfile: "/dev/null"
+	use-syslog: no
+
+	local-zone: "{{ local_domain_name}}." static
+
+	{% for device in localdevices %}
+	
+	local-data: "{{ device["hostname"] }}.{{ local_domain_name }}. IN A {{ device["ip_address"] }}"
+	local-data-ptr: "{{ device["ip_address"]}} {{ device["hostname"] }}.{{ local_domain_name }}"
+
+	{% endfor %}
+
+
+
+forward-zone:
+ 	name: "."
+ 	forward-addr: {{ primary_nameserver }}
+ 	forward-addr: {{ secondary_nameserver }}
+
+remote-control:
+	control-enable: no
