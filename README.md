@@ -51,22 +51,22 @@ In case you are wondering what this does: It installs the bare minimum for Ansib
 
 
 #### FAQ
-## Why do you not deal with IPv6 here?
+##### Why do you not deal with IPv6 here?
 My reasons are right at the top of this document. I'm aware of things like
 IPv6-tunnels, but if you know about those, chances are this isn't the right
 playbook for you.
-## Why should I bother with running my own resolver?
+##### Why should I bother with running my own resolver?
 Aside from the potential privacy / censorship implications when using Google,
 Cloudflare or (much, much worse in most cases) the nameserver provided by your
 ISP, running your own resolver allows you to do things like adblocking.
-## Why are the configuration files so short? There are more options!
+##### Why are the configuration files so short? There are more options!
 Most of the defaults that come bundled with packaged software on Debian are
 pretty sane. Relying on those to keep configurations concise and readable makes
 sense.
-## Why do you enable TCP for DNS? DNS is UDP!
+##### Why do you enable TCP for DNS? DNS is UDP!
 If you've ever dealt with DNSSEC-signed responses (which `unbound``cares
 about), you know that you want TCP. If you haven't trust me here. You want TCP.
-## What about logs?
+##### What about logs?
 The configuration for the DHCP-logs has been left untouched, the logs for the
 DNS-server have been minimized. If you want query logs (e.g. for IR-purposes)
 you have to manually enable them yourselves.
