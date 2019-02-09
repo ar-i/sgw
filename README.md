@@ -11,9 +11,8 @@ the following services are configured:
 * DHCP (through `isc-dhcp-server`, configurable subnets, default is 10.9.8.0/24, the first 10 addresses being reserved)
 * DNS (through `unbound`, DNSSEC-validating, configurable forward resolvers, defaults are [dns.watch](https://dns.watch) & [opennic.org](https://opennic.org))
 
-Optionally you can configure the following services in addition:
-* IDS (through `Suricata`, output in JSON)
-* Ad-blocking (through integrating [StevenBlack/hosts](https://github.com/StevenBlack/hosts)) into `unbound`)
+**Important**: This role is generally ready-to-use, but not bugfree yet.
+Prepare for minor glitches.
 
 **Important**: This role does **not** pay attention to IPv6. Most ISPs still
 don't give you native IPv6, and trying to accomodate DS-Lite would be
