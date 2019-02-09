@@ -4,11 +4,12 @@ authoritative;
 
 subnet {{ local_subnet | regex_replace('\/(.*)', '') }}  netmask 255.255.255.0 {
   range {{ local_subnet | regex_replace('\.0(.*)', '.100') }} {{ local_subnet | regex_replace('\.0(.*)', '.200') }};
-  option routers {{ internal_address }};
+  option routers {{ local_subnet | regex_replace('\.0(.*)', '1') }};
   option domain-name "{{ local_domain_name }}";
-  option domain-name-servers {{ internal_address }};
+  option domain-name-servers {{ local_subnet | regex_replace('\.0(.*)', '1') }}; 
 }
 
+{% if localdevices is defined %}
 {% for device in localdevices %}
 
 host {{ device.hostname }} {
@@ -18,3 +19,4 @@ host {{ device.hostname }} {
 }
 
 {% endfor %}
+{% endif %}

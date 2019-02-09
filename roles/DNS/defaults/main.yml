@@ -1,7 +1,0 @@
-local_subnet: 10.9.8.0/24
-primary_nameserver: 84.200.69.80
-secondary_nameserver: 193.183.98.66
-localdevices:
-  - hostname: gateway
-    ip_address: 10.9.8.2
-    physical_address: 08:00:27:21:1A:28

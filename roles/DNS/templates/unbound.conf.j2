@@ -20,12 +20,14 @@ server:
 
 	local-zone: "{{ local_domain_name}}." static
 
+	{% if localdevices is defined %}
 	{% for device in localdevices %}
 	
 	local-data: "{{ device["hostname"] }}.{{ local_domain_name }}. IN A {{ device["ip_address"] }}"
 	local-data-ptr: "{{ device["ip_address"]}} {{ device["hostname"] }}.{{ local_domain_name }}"
 
 	{% endfor %}
+	{% endif %}
 
 
 

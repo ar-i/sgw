@@ -1,4 +1,8 @@
 external_interface: 
 internal_interface: 
-loopback_interface: 
-local_domain_name: 
+loopback_interface: lo
+local_subnet: 10.9.8.0/24
+local_domain_name: "sgw.local"
+primary_nameserver: 84.200.69.80 # belongs to dns.watch
+secondary_nameserver: 193.183.98.66 # belongs to opennic.org
+localdevices:

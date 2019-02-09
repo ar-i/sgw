@@ -1,6 +1,0 @@
-local_subnet: 10.9.8.0/24
-internal_address: 10.9.8.1
-localdevices:
-  - hostname: gateway
-    ip_address: 10.9.8.1
-    physical_address: 08:00:27:21:1A:28
