@@ -6,6 +6,7 @@
   vars_files:
     - vars/main.yml
   roles:
+    - Hardening
     - NAT
     - DHCP
     - DNS
