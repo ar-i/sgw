@@ -8,7 +8,7 @@ This playbook turns a Debian-based machine into a lightweight, functional
 gateway to replace the crappy CPE-thingies ISPs tend to give you. Per default,
 the following services are configured:
 
-* DHCP (through `isc-dhcp-server`, configurable subnets, default is 10.9.8.0/24, the first 10 addresses being reserved)
+* DHCP (through `isc-dhcp-server`, configurable subnets, default is 10.9.8.0/24, the first 100 addresses being reserved for static assignments)
 * DNS (through `unbound`, DNSSEC-validating, configurable forward resolvers, defaults are [dns.watch](https://dns.watch) & [opennic.org](https://opennic.org))
 
 **Important**: This role is generally ready-to-use, but not bugfree yet.
@@ -48,6 +48,22 @@ In case you are wondering what this does: It installs the bare minimum for Ansib
 
 `ansible-playbook -kK -i hosts site.yml`
 
+Aside from dynamic assignment, this playbook has the capabilities to
+programmatically assign static addresses to pre-defined hosts. `vars/main.yml`
+contains a list called `localdevices`, for each entry (with the attributes
+`hostname`, `ip_address`, `physical_address`) the playbook will generate both an entry for DHCP as well as a corresponding DNS-record.
+
+Example for `localdevices:`
+
+```
+localdevices:
+	- hostname: mydesktop
+	  ip_address: 10.9.8.32
+	  physical_address: 08:00:27:21:1A:28
+	- hostname: mylaptop
+	  ip_address: 10.9.8.33
+	  physical_address: 08:00:27:21:1A:32
+```
 
 #### FAQ
 ##### Why do you not deal with IPv6 here?
