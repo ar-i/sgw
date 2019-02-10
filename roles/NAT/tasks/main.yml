@@ -6,3 +6,5 @@
 - name: Enable the firewall-rules
   template: src=ferm.conf.j2 dest=/etc/ferm/ferm.conf owner=root group=root mode=0400
 - shell: /usr/sbin/ferm /etc/ferm/ferm.conf
+- name: Create a cronjob to ensure reboot-safety
+  cron: name="Ferm persistence" special_time=reboot job="/usr/sbin/ferm /etc/ferm/ferm.conf"
